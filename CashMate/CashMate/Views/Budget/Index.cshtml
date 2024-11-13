@@ -1,0 +1,35 @@
+﻿@model IEnumerable<CashMate.Models.Budget>
+
+@{
+    ViewData["Title"] = "Budgets";
+}
+
+<div class="page-header mb-4">
+    <h1>Manage Your Budgets</h1>
+    <a href="/Budget/Create" class="btn btn-primary">Add New Budget</a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Category)</th>
+            <th>@Html.DisplayNameFor(model => model.Limit)</th>
+            <th>@Html.DisplayNameFor(model => model.Spent)</th>
+            <th>Actions</th> <!-- Колона за действия -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var budget in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => budget.Category)</td>
+                <td>@Html.DisplayFor(modelItem => budget.Limit)</td>
+                <td>@Html.DisplayFor(modelItem => budget.Spent)</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Budget", new { id = budget.Id })" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="@Url.Action("Delete", "Budget", new { id = budget.Id })" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

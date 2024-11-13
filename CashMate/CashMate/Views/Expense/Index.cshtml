@@ -1,0 +1,35 @@
+﻿@model IEnumerable<CashMate.Models.Expense>
+
+@{
+    ViewData["Title"] = "Expenses";
+}
+
+<div class="page-header mb-4">
+    <h1>Manage Your Expenses</h1>
+    <a href="/Expense/Create" class="btn btn-primary">Add New Expense</a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Description)</th>
+            <th>@Html.DisplayNameFor(model => model.Amount)</th>
+            <th>@Html.DisplayNameFor(model => model.Date)</th>
+            <th>Actions</th> <!-- Колона за действия -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var expense in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => expense.Description)</td>
+                <td>@Html.DisplayFor(modelItem => expense.Amount)</td>
+                <td>@expense.Date.ToString("yyyy-MM-dd")</td> <!-- Форматиране на датата -->
+                <td>
+                    <a href="@Url.Action("Edit", "Expense", new { id = expense.Id })" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="@Url.Action("Delete", "Expense", new { id = expense.Id })" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

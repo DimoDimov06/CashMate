@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashMate", "CashMate\CashMate.csproj", "{16A69B51-1713-4ADD-97BF-348C54B3A9EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16A69B51-1713-4ADD-97BF-348C54B3A9EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16A69B51-1713-4ADD-97BF-348C54B3A9EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16A69B51-1713-4ADD-97BF-348C54B3A9EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16A69B51-1713-4ADD-97BF-348C54B3A9EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6597C5DC-979F-43A8-B949-185A23A051D0}
+	EndGlobalSection
+EndGlobal

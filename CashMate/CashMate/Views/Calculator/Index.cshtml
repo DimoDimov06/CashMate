@@ -1,0 +1,35 @@
+﻿@model CashMate.Models.Calculator
+
+@{
+    ViewData["Title"] = "Calculator";
+}
+
+<h2>Calculator</h2>
+
+<form asp-action="Calculate" method="post">
+    <div>
+        <label>Number 1:</label>
+        <input asp-for="Number1" step="any" class="form-control" required />
+    </div>
+    <div>
+        <label>Number 2:</label>
+        <input asp-for="Number2" step="any" class="form-control" required />
+    </div>
+    <div>
+        <label>Operation:</label>
+        <select asp-for="Operation" class="form-control">
+            <option value="Add">Add</option>
+            <option value="Subtract">Subtract</option>
+            <option value="Multiply">Multiply</option>
+            <option value="Divide">Divide</option>
+        </select>
+    </div>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Calculate</button>
+    </div>
+</form>
+
+@if (Model?.Result != null)
+{
+    <h3 class="mt-3">Result: @Model.Result</h3>
+}
