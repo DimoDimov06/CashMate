@@ -1,6 +1,10 @@
 /* Hero section (main page) */
 .hero {
     background-color: #f8f9fa;
+    background-image: url("https://marketplace.canva.com/EAFO2PmJF-A/1/0/1600w/canva-brown-cute-organic-minimalist-zoom-virtual-background-zl1VO0_k3_w.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     padding: 60px 0;
     text-align: center;
 }
@@ -30,18 +34,19 @@
 /* Features section */
 .features {
     padding: 40px 0;
+    background-image: url("https://marketplace.canva.com/EAFO2PmJF-A/1/0/1600w/canva-brown-cute-organic-minimalist-zoom-virtual-background-zl1VO0_k3_w.jpg  ");
     text-align: center;
     background-color: #ffffff;
 }
 
     .features h2 {
         font-size: 2rem;
-        color: #343a40;
         margin-bottom: 40px;
     }
 
 .feature-cards {
     display: flex;
+
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
@@ -49,6 +54,7 @@
 
 .feature-card {
     background-color: #f1f1f1;
+    
     border-radius: 8px;
     padding: 20px;
     max-width: 300px;
