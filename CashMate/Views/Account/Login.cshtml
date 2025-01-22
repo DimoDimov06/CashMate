@@ -1,0 +1,17 @@
+﻿@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Email</span>
+        @Html.TextBox("email", null, new { @class = "form-control", aria_describedby="basic-addon1" })
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Password</span>
+        @Html.Password("password", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+     </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">UserName</span>
+        @Html.TextBox("userName", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+    </div>
+    <button type="submit">Connect</button>
+}

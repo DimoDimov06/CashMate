@@ -1,0 +1,38 @@
+﻿@using CashMate.Models.Data
+@model IEnumerable<Purchase>
+
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            decimal totalDebit = 0;
+            decimal totalCredit = 0;
+        }
+        @foreach (var purchase in Model)
+        {
+            <tr>
+                <td>@purchase.PurchaseDate.ToString("yyyy-MM-dd")</td>
+                <td class="numeric ">@String.Format("{0:F2}", purchase.Debit)</td>
+                <td class="numeric @(purchase.Credit > 0 ? "credit" : "")">@String.Format("{0:F2}", purchase.Credit)</td>
+                <td>@purchase.Description</td>
+            </tr>
+
+            totalDebit += purchase.Debit;
+            totalCredit += purchase.Credit;
+            
+        }
+        <tr>
+            <th>Total</th>
+            <th class="numeric">@String.Format("{0:F2}", totalDebit)</th>
+            <th class="numeric">@String.Format("{0:F2}", totalCredit)</th>
+            <th></th>
+        </tr>
+    </tbody>
+</table>
