@@ -24,8 +24,11 @@ namespace CashMate.Controllers
         public IActionResult Entering()
         {
             var userId = HttpContext.Session.GetString("UserId");
+            var userName = HttpContext.Session.GetString("UserName");
             if (userId != null)
             {
+                ViewBag.UserId = userId;
+                ViewBag.UserName = userName;
                 return View();
             }
             else

@@ -44,3 +44,11 @@ td {
 .credit {
     color: red; /* Червен цвят за кредита */
 }
+.form-container {
+    border: 1px solid #ccc; /* Цвят и стил на рамката */
+    padding: 20px; /* Разстояние вътре в рамката */
+    width: 600px; /* Ширина на контейнера */
+    margin: 0 auto; /* Центриране на контейнера на екрана */
+    border-radius: 5px; /* Закръглени ъгли (по избор) */
+    background-color: skyblue; /* Фонов цвят (по избор) */
+}

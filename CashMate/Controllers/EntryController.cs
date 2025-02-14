@@ -1,13 +1,15 @@
 ﻿namespace CashMate.Controllers
 {
 
+    using CashMate.Models;
     using CashMate.Models.Data;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
-    using System.Web.Http;
     using Microsoft.IdentityModel.Tokens;
+    using System;
+    using Microsoft.AspNetCore.Http;
+    using System.Web.WebPages;
 
-    [Authorize]
     public class EntryController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -17,12 +19,14 @@
         }
 
         // GET: Purchases/Create
-
-       public IActionResult Index()
+   
+        [HttpGet]
+        public IActionResult Index()
         {
-            var userId = HttpContext.Session.GetString("UserId");
-            if (userId != null)
+            var userName = HttpContext.Session.GetString("UserName");
+            if (userName != null)
             {
+                ViewBag.UserId = userName;
                 return View();
             }
             else
@@ -33,17 +37,32 @@
         }
 
         // POST: Purchases/Create
-        [Microsoft.AspNetCore.Mvc.HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PurchaseDate,Debit,Credit,Description,UserId")] Purchase purchase)
+        public async Task<IActionResult> Index(EntryViewModel model)
         {
+            var userId = HttpContext.Session.GetString("UserId").AsInt();
             if (ModelState.IsValid)
             {
-                _db.Add(purchase);
+                var purchase = new Purchase();
+                purchase.PurchaseDate = model.PurchaseDate;
+                purchase.Debit = model.Debit;
+                purchase.Credit = model.Credit;
+                purchase.Description = model.Description;
+                purchase.UserID = userId;
+
+
+                _db.Purchases.Add(purchase);
                 await _db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index)); // или където искате да пренасочите
+                return RedirectToAction("Index"); // или където искате да пренасочите
             }
-            return View(purchase);
+            return View(model);
+            
+        }
+
+        private int Parse(string? userId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

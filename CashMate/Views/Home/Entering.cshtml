@@ -1,24 +1,33 @@
 ﻿@{
     ViewBag.Title = "Purchases";
 }
-
-<h2>Select period</h2>
-
-@using (Html.BeginForm("GetPurchases", "Purchases", FormMethod.Post, new { id = "dateForm" }))
+@using (Html.BeginForm("GetPurchases", "Purchases", FormMethod.Post, new { id = "dateForm" })) 
 {
-    <label for="startDate">Begin date:</label>
-    <input type="date" id="startDate" name="startDate" required />
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="form-container mx-auto">
 
-    <label for="endDate">End date:</label>
-    <input type="date" id="endDate" name="endDate" required />
+        <h2>Select period for @ViewBag.UserName</h2>
+        
+        <div>
+            <label for="startDate">Begin date:</label>
+            <input type="date" id="startDate" name="startDate" required />
 
-    <input type="submit" value="Show movemend" />
+            <label for="endDate">End date:</label>
+            <input type="date" id="endDate" name="endDate" required />
+        </div><br />
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-primary" type="submit">Show movemend</button>
+        </div>
+
+    </div>
+    <div id="result">
+        @* Тук ще се зареждат резултатите *@
+    </div>
+</body>
 }
-
-<div id="result">
-    @* Тук ще се зареждат резултатите *@
-</div>
-
 @section scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>

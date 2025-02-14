@@ -1,4 +1,6 @@
-﻿namespace CashMate.Models.Data
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace CashMate.Models.Data
 {
     public class User
     {
@@ -6,9 +8,11 @@
         public string Email { get; set; }
         public string PasswordHash { get; set; }
 
-        public string UserName { get; set; } = string.Empty;
+        public string UserName { get; set; }
 
-        public bool IsEmailConfirmed { get; set; }=false;
+        public int Code { get; set; }
+
+        public bool IsEmailConfirmed { get; set; }
 
         public ICollection<Purchase> Purchases { get; set; }
 

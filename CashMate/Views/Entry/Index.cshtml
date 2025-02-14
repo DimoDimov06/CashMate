@@ -1,30 +1,39 @@
-﻿@model CashMate.Models.Data.Purchase
+﻿@model CashMate.Models.EntryViewModel
 
-<h2>Create new order</h2>
+@using (Html.BeginForm())
+{
 
-<form asp-action="Create" method="post">
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Date</span>
-        @Html.TextBox("PurchaseDate", null, new { @class = "form-control", type = "date", aria_describedby = "basic-addon1" })
-    </div>
-    <div class="form-group">
-        <label asp-for="Debit"></label>
-        <input asp-for="Debit" class="form-control" />
-        <span asp-validation-for="Debit" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Credit"></label>
-        <input asp-for="Credit" class="form-control" />
-        <span asp-validation-for="Credit" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <input asp-for="Description" class="form-control" />
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+    <head>
+        <link rel="stylesheet" href="~/css/site.css" />
+    </head>
+    <body>
+        <div class="form-container mx-auto">
 
-<div>
-    <a asp-action="Index">Back</a>
-</div>
+            <h2>Create new order for</h2>
+            <h2>@ViewBag.UserId</h2>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Date</span>
+                @Html.TextBox("purchaseDate", null, new { @class = "form-control", type = "date", aria_describedby = "basic-addon1" })
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Debit</span>
+                @Html.TextBox("debit", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Credit</span>
+                @Html.TextBox("credit", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Description</span>
+                @Html.TextBox("description", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+            </div>
+
+    
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary" type="submit">Save</button>
+            </div>
+           
+        </div>
+    </body>
+}

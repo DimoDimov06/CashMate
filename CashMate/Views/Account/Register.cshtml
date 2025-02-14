@@ -1,13 +1,57 @@
-﻿@using (Html.BeginForm())
+﻿@model CashMate.Models.RegisterViewModel
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Email</span>
-        @Html.TextBox("email", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
-    </div>
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Password</span>
-        @Html.Password("password", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
-    </div>
-    <button type="submit">Registration</button>
+
+    <head>
+        <link rel="stylesheet" href="~/css/site.css" />
+    </head>
+    <body>
+        <div class="form-container mx-auto">
+
+            <h2>Registration</h2>
+
+            <div class="input-group mb-3">
+               <span class="input-group-text" id="basic-addon1">Email</span>
+               @Html.TextBox("email", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Password</span>
+                @Html.Password("password", null, new { @class = "form-control", aria_describedby = "basic-addon1", id = "password" })
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Confirm Password</span>
+                @Html.Password("confirmPassword", null, new { @class = "form-control", aria_describedby = "basic-addon1", id = "confirmPassword" })
+            </div>
+
+            <div id="passwordError" style="color:red; display:none;"></div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">UserName</span>
+                @Html.TextBox("userName", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary" type="submit" onclick="return validatePasswords()">Registration</button>
+            </div>
+        </div>
+    </body>
 }
+
+<script>
+    function validatePasswords() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        var errorDiv = document.getElementById("passwordError");
+
+        if (password !== confirmPassword) {
+            errorDiv.innerText = "Паролите не съвпадат!";
+            errorDiv.style.display = "block"; // Показване на съобщението за грешка
+            return false; // Забранява подаването на формуляра
+        } else {
+            errorDiv.style.display = "none"; // Скриване на съобщението за грешка
+            return true; // Позволява подаването на формуляра
+        }
+    }
+</script>
