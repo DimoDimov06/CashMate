@@ -39,7 +39,7 @@
         // POST: Purchases/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(EntryViewModel model)
+        public ActionResult Index(EntryViewModel model)
         {
             var userId = HttpContext.Session.GetString("UserId").AsInt();
             if (ModelState.IsValid)
@@ -53,7 +53,7 @@
 
 
                 _db.Purchases.Add(purchase);
-                await _db.SaveChangesAsync();
+                _db.SaveChanges();
                 return RedirectToAction("Index"); // или където искате да пренасочите
             }
             return View(model);

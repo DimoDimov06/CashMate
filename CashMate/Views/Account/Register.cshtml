@@ -5,6 +5,15 @@
 
     <head>
         <link rel="stylesheet" href="~/css/site.css" />
+        <style>
+            .input-group-text {
+                min-width: 27%; /* Задава минимална ширина за спана */
+            }
+
+            .form-control {
+                width: 73%; /* Изчислява ширината на текстовото поле */
+            }
+        </style>
     </head>
     <body>
         <div class="form-container mx-auto">
@@ -12,8 +21,8 @@
             <h2>Registration</h2>
 
             <div class="input-group mb-3">
-               <span class="input-group-text" id="basic-addon1">Email</span>
-               @Html.TextBox("email", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+                <span class="input-group-text" id="basic-addon1">Email</span>
+                @Html.TextBox("email", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
             </div>
 
             <div class="input-group mb-3">

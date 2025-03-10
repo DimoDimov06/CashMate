@@ -2,38 +2,44 @@
 
 @using (Html.BeginForm())
 {
+    <style>
+        .input-group-text {
+            min-width: 20%; /* Задава минимална ширина за спана */
+        }
 
-    <head>
-        <link rel="stylesheet" href="~/css/site.css" />
-    </head>
-    <body>
-        <div class="form-container mx-auto">
+        .form-control {
+            width: 80%; /* Изчислява ширината на текстовото поле */
+        }
+    </style>
+    <div class="form-container mx-aut">
 
-            <h2>Create new order for</h2>
-            <h2>@ViewBag.UserId</h2>
+        <h2>Create new order for</h2>
+        <h2>@ViewBag.UserId</h2>
 
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Date</span>
-                @Html.TextBox("purchaseDate", null, new { @class = "form-control", type = "date", aria_describedby = "basic-addon1" })
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Debit</span>
-                @Html.TextBox("debit", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Credit</span>
-                @Html.TextBox("credit", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Description</span>
-                @Html.TextBox("description", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
-            </div>
-
-    
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-primary" type="submit">Save</button>
-            </div>
-           
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Date</span>
+            @Html.TextBox("purchaseDate", null, new { @class = "form-control", type = "date", aria_describedby = "basic-addon1" })
         </div>
-    </body>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Debit</span>
+            @Html.TextBox("debit", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Credit</span>
+            @Html.TextBox("credit", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Description</span>
+            @Html.TextBox("description", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+        </div>
+
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+
+    </div>
+
 }
+
+
