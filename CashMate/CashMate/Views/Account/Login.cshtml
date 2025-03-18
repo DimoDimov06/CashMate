@@ -1,0 +1,33 @@
+﻿@model CashMate.Models.LoginViewModel
+@using (Html.BeginForm())
+{
+     @Html.AntiForgeryToken()
+
+     <style>
+        .input-group-text {
+            min-width: 16%; /* Задава минимална ширина за спана */
+        }
+
+        .form-control {
+            width: 84%; /* Изчислява ширината на текстовото поле */
+        }
+     </style>
+
+    <div class="form-container mx-auto">
+
+        <h2>Registration</h2>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Email</span>
+            @Html.TextBox("email", null, new { @class = "form-control", aria_describedby="basic-addon1" })
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Password</span>
+            @Html.Password("password", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-primary" type="submit">Connect</button>
+        </div>
+    </div>
+    
+}

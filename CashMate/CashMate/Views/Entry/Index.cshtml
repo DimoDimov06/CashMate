@@ -1,0 +1,44 @@
+﻿@model CashMate.Models.EntryViewModel
+
+@using (Html.BeginForm())
+{
+    <style>
+        .input-group-text {
+            min-width: 20%; /* Задава минимална ширина за спана */
+        }
+
+        .form-control {
+            width: 80%; /* Изчислява ширината на текстовото поле */
+        }
+    </style>
+    <div class="form-container mx-aut">
+
+        <h2>Create new order for</h2>
+        <h2>@ViewBag.UserId</h2>
+
+        @Html.HiddenFor(model => model.Id) <!-- Скрито поле за ID на покупката -->
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Date</span>
+            @Html.TextBoxFor(model => model.PurchaseDate, new { @class = "form-control", type = "date", aria_describedby = "basic-addon1" })
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Debit</span>
+            @Html.TextBoxFor(model => model.Debit, new { @class = "form-control", aria_describedby = "basic-addon1", step = "0.01", pattern = @"^\d+(\.\d{1,2})?$" })
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Credit</span>
+            @Html.TextBoxFor(model => model.Credit, new { @class = "form-control", aria_describedby = "basic-addon1", step = "0.01", pattern = @"^\d+(\.\d{1,2})?$" })
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Description</span>
+            @Html.TextBoxFor(model => model.Description, new { @class = "form-control", aria_describedby = "basic-addon1" })
+        </div>
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+
+    </div>
+}
+

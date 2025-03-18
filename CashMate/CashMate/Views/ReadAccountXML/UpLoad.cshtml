@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Upload XML";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="form-container mx-auto">
+
+        <h2>Upload XML File for</h2>
+        <h2>@ViewBag.UserId</h2>
+
+
+        @using (Html.BeginForm("Upload", "ReadAccountXML", FormMethod.Post, new { enctype = "multipart/form-data", @class = "needs-validation", novalidate = "novalidate" }))
+        {
+            <div class="mb-3">
+                <label for="fileInput" class="form-label">Select file</label>
+                <input type="file" class="form-control" id="fileInput" name="file" accept=".xml" required />
+                <div class="invalid-feedback">
+                    Please, select file.
+                </div>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary" type="submit">Upload</button>
+            </div>
+        }
+    </div>
+</body>

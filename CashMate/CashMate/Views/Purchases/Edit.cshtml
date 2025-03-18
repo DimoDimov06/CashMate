@@ -1,0 +1,84 @@
+﻿@model CashMate.Models.EntryViewModel
+
+@{
+    ViewBag.Title = "Edit Purchase";
+}
+
+<h2>Edit Purchase</h2>
+
+@using (Html.BeginForm("Edit", "Purchases", FormMethod.Post))
+{
+    <head>
+        <link rel="stylesheet" href="~/css/site.css" />
+    </head>
+    <body>
+        <style>
+            .input-group-text {
+                min-width: 20%; /* Задава минимална ширина за спана */
+            }
+
+            .form-control {
+                width: 80%; /* Изчислява ширината на текстовото поле */
+            }
+        </style>
+        <div class="form-container mx-auto">
+            
+            @Html.AntiForgeryToken()
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Date</span>
+                @Html.TextBoxFor(model => model.PurchaseDateFormatted, new { @class = "form-control",
+                        type = "date", aria_describedby = "basic-addon1" })
+                @Html.ValidationMessageFor(model => model.PurchaseDate)
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Debit</span>
+                @Html.TextBoxFor(model => model.Debit, new { @class = "form-control", type = "number", step = "0.01",
+                        aria_describedby = "basic-addon1", id = "debitInput" })
+                @Html.ValidationMessageFor(model => model.Debit)
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Credit</span>
+                @Html.TextBoxFor(model => model.Credit, new { @class = "form-control", type = "number", step = "0.01",
+                        aria_describedby = "basic-addon1", id = "creditInput" })
+                @Html.ValidationMessageFor(model => model.Credit)
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Description</span>
+                @Html.TextBoxFor(model => model.Description, new { @class = "form-control", aria_describedby = "basic-addon1" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+
+            <div class="form-group">
+                 <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+    
+
+            <div>
+                 @Html.ActionLink("Back to List", "Entering", "Home")
+            </div>
+        </div>
+        <script>
+            document.getElementById('debitInput').addEventListener('blur', function () {
+                var value = parseFloat(this.value);
+                if (!isNaN(value)) {
+                    this.value = value.toFixed(2); // Форматиране до два знака след десетичната запетая
+                } else if (this.value.trim() === "")  {
+                    this.value = ""; // Изчистване на полето, ако стойността е невалидна
+                }
+            });
+
+            document.getElementById('creditInput').addEventListener('blur', function () {
+                var value = parseFloat(this.value);
+                if (!isNaN(value)) {
+                    this.value = value.toFixed(2); // Форматиране до два знака след десетичната запетая
+                } else if (this.value.trim() === "")  {
+                    this.value = ""; // Изчистване на полето, ако стойността е невалидна
+                }
+            });
+        </script>
+    </body>
+}

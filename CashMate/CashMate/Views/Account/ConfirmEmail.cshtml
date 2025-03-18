@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Confirm Email";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="form-container mx-auto">
+        <h2>Confirm Email</h2>
+
+        <h4>A confirmation code has been sent to your email.</h4>
+        <form asp-action="ConfirmEmail" method="post">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Insert verification code:</span>
+                @Html.TextBox("code", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+            </div>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+        </form> 
+    </div>
+    
+            
+</body>
