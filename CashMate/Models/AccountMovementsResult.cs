@@ -152,17 +152,17 @@
         public string MovementType { get; set; }
 
         [XmlIgnore]
-        public decimal Amount { get; set; }
+        public string Amount { get; set; }
 
         [XmlElement("Amount")]
         public string AmountString
         {
-            get { return Amount.ToString("0.##", CultureInfo.InvariantCulture); }
+            get { return Amount; }
             set
             {
                 // Заменяме запетаята с точка, за да можем да парсваме правилно
                 var normalizedValue = value.Replace(",", ".");
-                Amount = decimal.Parse(normalizedValue, CultureInfo.InvariantCulture);
+                Amount = normalizedValue;
             }
         }
         [XmlIgnore]

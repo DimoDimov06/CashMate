@@ -1,8 +1,10 @@
+using System;
 using System.Diagnostics;
 using CashMate.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authentication;
-using System.Web.Http;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace CashMate.Controllers
 {
@@ -20,24 +22,32 @@ namespace CashMate.Controllers
             return View();
         }
 
-        [Authorize]
+    
         public IActionResult Entering()
         {
             var userId = HttpContext.Session.GetString("UserId");
             var userName = HttpContext.Session.GetString("UserName");
             if (userId != null)
             {
+                // Задаване на начална и крайна дата за текущия месец
+                var today = DateTime.Today;
+                var startDate = new DateTime(today.Year, today.Month, 1); // Първи ден на месеца
+                var endDate = startDate.AddMonths(1).AddDays(-1); // Последен ден на месеца
+
+                ViewBag.StartDate = startDate.ToString("yyyy-MM-dd");
+                ViewBag.EndDate = endDate.ToString("yyyy-MM-dd");
+
                 ViewBag.UserId = userId;
                 ViewBag.UserName = userName;
-                return View();
+                return View(); 
             }
             else
             {
                 return RedirectToAction("Index", "Home");
             }
-            }
+        }
 
-            [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

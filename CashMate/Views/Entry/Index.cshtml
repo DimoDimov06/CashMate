@@ -16,29 +16,51 @@
         <h2>Create new order for</h2>
         <h2>@ViewBag.UserId</h2>
 
+        @Html.HiddenFor(model => model.Id) <!-- Скрито поле за ID на покупката -->
+
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Date</span>
-            @Html.TextBox("purchaseDate", null, new { @class = "form-control", type = "date", aria_describedby = "basic-addon1" })
+            @Html.TextBoxFor(model => model.PurchaseDate, new { @class = "form-control", type = "date", aria_describedby = "basic-addon1" })
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Debit</span>
-            @Html.TextBox("debit", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+            @Html.TextBoxFor(model => model.DebitFormatted, new { @class = "form-control", aria_describedby = "basic-addon1", type = "text", step = "0.01", pattern = @"^\d+(\.\d{1,2})?$" })
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Credit</span>
-            @Html.TextBox("credit", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+            @Html.TextBoxFor(model => model.CreditFormatted, new { @class = "form-control", aria_describedby = "basic-addon1", type = "text", step = "0.01", pattern = @"^\d+(\.\d{1,2})?$" })
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Description</span>
-            @Html.TextBox("description", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
+            @Html.TextBoxFor(model => model.Description, new { @class = "form-control", aria_describedby = "basic-addon1" })
         </div>
-
 
         <div class="d-grid gap-2 col-6 mx-auto">
             <button class="btn btn-primary" type="submit">Save</button>
         </div>
 
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const debitInput = document.querySelector("#Debit");
+
+            debitInput.addEventListener("input", function (event) {
+                let value = event.target.value;
+                value = value.replace(/,/g, '.'); // Заменя всички запетаи с точки
+                event.target.value = value;
+            }
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            const creditInput = document.querySelector("#Credit");
+
+            creditInput.addEventListener("input", function (event) {
+                let value = event.target.value;
+                value = value.replace(/,/g, '.'); // Заменя всички запетаи с точки
+                event.target.value = value;
+            }
+        });
+    </script>
 
 }
 

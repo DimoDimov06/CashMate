@@ -8,6 +8,7 @@
     using CashMate.Models.Data;
     using Microsoft.AspNetCore.Mvc;
     using System.Web.WebPages;
+    using System.Globalization;
 
     public class ReadAccountXMLController : Controller
     {
@@ -70,8 +71,8 @@
                     var purchase = new Purchase
                     {
                         PurchaseDate = accountMovement.Date,
-                        Credit = accountMovement.MovementType == "CR" ? accountMovement.Amount : 0,
-                        Debit = accountMovement.MovementType == "DR" ? accountMovement.Amount : 0,
+                        Credit = accountMovement.MovementType == "Credit" ? decimal.Parse(accountMovement.Amount, CultureInfo.InvariantCulture) : 0,
+                        Debit = accountMovement.MovementType == "Debit" ? decimal.Parse(accountMovement.Amount, CultureInfo.InvariantCulture) : 0,
                         Description = accountMovement.Reason,
                         UserID = userId
                     };

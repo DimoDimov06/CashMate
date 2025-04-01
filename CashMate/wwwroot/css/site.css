@@ -19,7 +19,7 @@ html {
 }
 
 body {
-    background-image: url('/image/background.png'); /* Заменете с пътя към вашето изображение */ /*/image/picturis.png*/
+    background-image: url('/image/picturis.png'); /* Заменете с пътя към вашето изображение */
     background-size: cover; /* Покрива целия фон */
     background-position: center; /* Центрира изображението */
     height: 100vh; /* Задава височината на фона */

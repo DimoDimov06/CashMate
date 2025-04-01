@@ -1,4 +1,8 @@
-﻿namespace CashMate.Controllers
+﻿using CashMate.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Web.Mvc;
+
+namespace CashMate.Controllers
 {
 
     using CashMate.Models;
@@ -21,12 +25,31 @@
         // GET: Purchases/Create
    
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int? id)
         {
             var userName = HttpContext.Session.GetString("UserName");
             if (userName != null)
             {
                 ViewBag.UserId = userName;
+                if (id.HasValue)
+                {
+                    var purchase = _db.Purchases.Find(id.Value);
+                    if (purchase == null)
+                    {
+                        return NotFound();
+                    }
+
+                    var model = new EntryViewModel
+                    {
+                        Id = purchase.Id,
+                        PurchaseDate = purchase.PurchaseDate,
+                        Debit = purchase.Debit,
+                        Credit = purchase.Credit,
+                        Description = purchase.Description
+                    };
+
+                    return View(model);
+                }
                 return View();
             }
             else
@@ -59,12 +82,10 @@
             return View(model);
             
         }
-
         private int Parse(string? userId)
         {
             throw new NotImplementedException();
         }
     }
 }
-
 

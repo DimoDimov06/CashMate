@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Purchases";
 }
+
 @using (Html.BeginForm("GetPurchases", "Purchases", FormMethod.Post, new { id = "dateForm" }))
 {
     <head>
@@ -8,38 +9,43 @@
     </head>
     <body>
         <div class="form-container mx-auto">
-
             <h2>Select period for @ViewBag.UserName</h2>
 
             <div>
                 <label for="startDate">Begin date:</label>
-                <input type="date" id="startDate" name="startDate" required />
+                <input type="date" id="startDate" name="startDate" value="@ViewBag.StartDate" required />
 
                 <label for="endDate">End date:</label>
-                <input type="date" id="endDate" name="endDate" required />
+                <input type="date" id="endDate" name="endDate" value="@ViewBag.EndDate" required />
             </div><br />
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-primary" type="submit">Show movemend</button>
+                <button class="btn btn-primary" type="submit">Show movement</button>
             </div>
-
         </div>
         <div id="result">
             @* Тук ще се зареждат резултатите *@
         </div>
     </body>
 }
+
 @section scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $('#dateForm').submit(function (event) {
-            event.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("GetPurchases", "Purchases")',
-                data: $(this).serialize(),
-                success: function (data) {
-                    $('#result').html(data);
-                }
+        $(document).ready(function () {
+            // Изпращане на формата при натискане на бутона "Submit"
+            $('#dateForm').submit(function (event) {
+                event.preventDefault(); // Предотвратяване на стандартното изпращане на формата
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetPurchases", "Purchases")',
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        $('#result').html(data); // Показване на резултатите в div с id "result"
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error: " + error); // Логване на грешки в конзолата
+                    }
+                });
             });
         });
     </script>
