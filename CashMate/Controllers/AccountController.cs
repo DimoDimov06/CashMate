@@ -221,5 +221,13 @@
             TempData["ErrorMessage"] = "Invalid verification code!";
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Clear(); // Изчистване на сесията
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

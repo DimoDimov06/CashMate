@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
 namespace CashMate.Models
@@ -7,7 +8,7 @@ namespace CashMate.Models
     {
 
         public int? Id { get; set; }
-
+        [DisplayName("Дата....")]
         [Required(ErrorMessage = "Date is required")]
         public DateTime PurchaseDate { get; set; }
 

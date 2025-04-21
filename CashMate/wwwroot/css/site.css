@@ -1,31 +1,27 @@
 html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-
-html {
+    font-size: 14px;
     position: relative;
     min-height: 100%;
 }
 
-body {
-    background-image: url('/image/picturis.png'); /* Заменете с пътя към вашето изображение */
-    background-size: cover; /* Покрива целия фон */
-    background-position: center; /* Центрира изображението */
-    height: 100vh; /* Задава височината на фона */
-    margin: 0; /* Премахва отстъпа */
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
 }
 
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+body {
+    background-image: url('/image/picturis.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    padding-bottom: 60px;
+}
 
 table {
     width: 100%;
@@ -33,30 +29,30 @@ table {
 }
 
 th {
-    text-align: center; /* Центрира заглавията */
+    text-align: center;
 }
 
 td {
-    text-align: left; /* Низовете наляво */
+    text-align: left;
 }
 
 .numeric {
-    text-align: right; /* Числата вдясно */
+    text-align: right;
 }
 
 .credit {
-    color: red; /* Червен цвят за кредита */
+    color: red;
 }
+
 .input-group {
-    align-items: center; /* Подравнява елементите по вертикала */
+    align-items: center;
 }
 
 .form-container {
-    border: 1px solid #ccc; /* Цвят и стил на рамката */
-    padding: 20px; /* Разстояние вътре в рамката */
-    width: 90%; /* Ширина на контейнера */
-    margin: 0 auto; /* Центриране на контейнера на екрана */
-    border-radius: 5px; /* Закръглени ъгли (по избор) */
-    background-color: skyblue; /* Фонов цвят (по избор) */
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: skyblue;
 }
-

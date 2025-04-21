@@ -5,9 +5,9 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <style>
         .description-cell {
-            white-space: pre-wrap; /* Позволява текста да се прехвърля на нов ред */
-            word-wrap: break-word; /* Позволява на думите да се прекъсват, ако са твърде дълги */
-            max-width: 200px; /* Ограничава ширината на колоната */
+        white-space: pre-wrap; /* Позволява текста да се прехвърля на нов ред */
+        word-wrap: break-word; /* Позволява на думите да се прекъсват, ако са твърде дълги */
+        max-width: 200px; /* Ограничава ширината на колоната */
         }
     </style>
 </head>
@@ -15,8 +15,10 @@
     <div class="form-container mx-auto">
         <table class="table">
             @{
+
                 decimal totalDebit = 0;
                 decimal totalCredit = 0;
+                decimal totalResult = 0;
             }
             <thead class="table-dark">
                 <tr>
@@ -52,12 +54,30 @@
                 }
             </tbody>
             <tfoot>
-                <tr>
-                    <th class="text-start">Total</th>
-                    <td class="numeric">@String.Format("{0:F2}", totalDebit)</td>
-                    <td class="numeric">@String.Format("{0:F2}", totalCredit)</td>
-                    <td class="text-start" colspan="3"></td>
-                </tr>
+                @{
+
+                    totalResult = totalDebit - totalCredit;
+                    <tr>
+                        <th class="text-start">Total</th>
+                        <td class="numeric @(totalDebit > 0 ? "debit" : "")">@String.Format("{0:F2}", totalDebit)</td>
+                        <td class="numeric @(totalCredit > 0 ? "credit" : "")">@String.Format("{0:F2}", totalCredit)</td>
+                        <td class="text-start" colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-start">Result</th>
+                        @if (totalResult >= 0) 
+                        {
+                            <td class="numeric debit">@String.Format("{0:F2}", totalResult)</td>
+                            <td></td>
+                        }
+                        else 
+                        {
+                            <td></td>
+                            <td class="numeric credit">@String.Format("{0:F2}", totalResult)</td>
+                        }
+                        <td class="text-start" colspan="3"></td>
+                    </tr>
+                }
             </tfoot>
         </table>
     </div>

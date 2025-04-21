@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Mvc
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,12 +7,36 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <style>
-
         aside {
-            background-color: darkgrey;
-            width: 10%;
+            background-color: #FFFFFF80;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
         }
 
+        .savings-tips {
+            background-color: #e9f5ff80;
+            padding: 15px;
+            border-left: 4px solid #258cfb;
+            margin-bottom: 15px;
+        }
+
+            .savings-tips h4 {
+                color: #258cfb;
+                margin-bottom: 15px;
+            }
+
+            .savings-tips ul {
+                padding-left: 20px;
+            }
+
+            .savings-tips li {
+                margin-bottom: 10px;
+                line-height: 1.4;
+            }
     </style>
 </head>
 <body>
@@ -22,35 +45,45 @@
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CashMate</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                                               
-                        
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Entry" asp-action="Index">Entering</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Entering">Report</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Entry" asp-action="Index">Entering</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ReadAccountXML" asp-action="UpLoad">Read XML</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Entering">Report</a>
                         </li>
-
-
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="ReadAccountXML" asp-action="UpLoad">Read XML</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Registration</a>
-                        </li>
+                        @if (Context.Session.GetString("UserId") != null)
+                        {
+                            <li class="nav-item">
+                                <span class="nav-link text-light">Welcome, @Context.Session.GetString("UserName")!</span>
+                            </li>
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
+                                    <button type="submit" class="nav-link text-light btn btn-link">Logout</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -62,17 +95,23 @@
                 @RenderBody()
             </main>
             <aside class="col-md-4">
-                <h4>Ways to save</h4>
-                <ul class="list-unstyled">
-                    <li><a href="https://financer.bg" target="_blank">Site 1: Financer</a></li>
-                    <li><a href="https://en.wikipedia.org/wiki/Investment" target="_blank">Site 2 Investment</a></li>
-                </ul>
+                <div class="savings-tips">
+                    <h2>Спести умно, живей по-добре!</h2>
+                    <h4>Искаш повече пари в края на месеца?</h4>
+                    <p>Следвай тези лесни съвети и започни да трупаш спестявания днес!</p>
+                    <ul>
+                        <li><strong>Определи бюджет</strong> –  Следи разходите си и намали ненужните покупки.</li>
+                        <li><strong>Автоматично спестяване</strong> – Прехвърляй малка сума всеки месец в спестовна сметка.</li>
+                        <li><strong>Пазарувай с ум</strong> – Търси промоции, използвай кодове за отстъпка и не купувай импулсивно.</li>
+                        <li><strong>Готви у дома</strong> – Намали разходите за ресторанти и доставки.</li>
+                        <li><strong>Оптимизирай сметките си</strong> – Намери по-изгодни планове за ток, интернет и мобилни услуги.</li>
+                    </ul>
+                </div>
             </aside>
         </div>
     </div>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
-
 </body>
 </html>
