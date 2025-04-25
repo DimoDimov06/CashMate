@@ -30,7 +30,7 @@ CashMate използва следните технологии:
 
 - **Backend**: ASP.NET Core
 - **Frontend**: Razor Pages
-- **База данни**: Entity Framework Core с InMemoryDatabase за тестване
+- **База данни**: Entity Framework Core, MySQL Workbench с InMemoryDatabase за тестване
 - **Тестове**: NUnit и Moq за Unit тестване
 
 - ## 📧 Контакти
