@@ -1,4 +1,6 @@
-﻿@model CashMate.Models.LoginViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model CashMate.Models.LoginViewModel
 @using (Html.BeginForm())
 {
      @Html.AntiForgeryToken()
@@ -15,18 +17,18 @@
 
     <div class="form-container mx-auto">
 
-        <h2>Registration</h2>
+        <h2>@Localizer["Login"]</h2>
 
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Email</span>
+            <span class="input-group-text" id="basic-addon1">@Localizer["Email"]</span>
             @Html.TextBox("email", null, new { @class = "form-control", aria_describedby="basic-addon1" })
         </div>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Password</span>
+            <span class="input-group-text" id="basic-addon1">@Localizer["Password"]</span>
             @Html.Password("password", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
         </div>
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-primary" type="submit">Connect</button>
+            <button class="btn btn-primary" type="submit">@Localizer["Connect"]</button>
         </div>
     </div>
     

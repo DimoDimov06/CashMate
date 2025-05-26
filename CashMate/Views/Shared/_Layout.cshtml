@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -6,6 +8,8 @@
     <title>@ViewData["Title"] - CashMate</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <!-- Добавете Font Awesome за икони -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         aside {
             background-color: #FFFFFF80;
@@ -37,6 +41,29 @@
                 margin-bottom: 10px;
                 line-height: 1.4;
             }
+
+        /* Стилове за превключвателя на език */
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+
+        .language-option {
+            padding: 5px 10px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+
+            .language-option.active {
+                opacity: 1;
+                font-weight: bold;
+            }
+
+            .language-option:hover {
+                opacity: 0.9;
+            }
     </style>
 </head>
 <body>
@@ -51,37 +78,59 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Entry" asp-action="Index">Entering</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Entry" asp-action="Index">@Localizer["Entering"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Entering">Report</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Entering">@Localizer["Report"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="ReadAccountXML" asp-action="UpLoad">Read XML</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="ReadAccountXML" asp-action="UpLoad">@Localizer["Read XML"]</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <!-- Добавете превключвател за език тук -->
+                        <li class="nav-item language-switcher">
+                            <form id="culture-form" asp-controller="Home" asp-action="SetLanguage" method="post">
+                                <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                <input type="hidden" name="culture" id="culture-input" />
+
+                                <div class="d-flex align-items-center">
+                                    <span class="text-light me-2"><i class="fas fa-language"></i></span>
+                                    <div class="language-option @(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en" ? "active" : "")"
+                                         onclick="setLanguage('en')">
+                                        <img src="https://flagcdn.com/w20/gb.png" alt="English" title="English" class="me-1" style="height: 15px;" />
+                                        EN
+                                    </div>
+                                    <div class="language-option @(System.Threading.Thread.CurrentThread.CurrentCulture.Name == "bg" ? "active" : "")"
+                                         onclick="setLanguage('bg')">
+                                        <img src="https://flagcdn.com/w20/bg.png" alt="Български" title="Български" class="me-1" style="height: 15px;" />
+                                        BG
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+
                         @if (Context.Session.GetString("UserId") != null)
                         {
                             <li class="nav-item">
-                                <span class="nav-link text-light">Welcome, @Context.Session.GetString("UserName")!</span>
+                                <span class="nav-link text-light">@Localizer["Welcome"], @Context.Session.GetString("UserName")!</span>
                             </li>
                             <li class="nav-item">
                                 <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
-                                    <button type="submit" class="nav-link text-light btn btn-link">Logout</button>
+                                    <button type="submit" class="nav-link text-light btn btn-link">@Localizer["Logout"]</button>
                                 </form>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">@Localizer["Login"]</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">@Localizer["Register"]</a>
                             </li>
                         }
                     </ul>
@@ -96,15 +145,15 @@
             </main>
             <aside class="col-md-4">
                 <div class="savings-tips">
-                    <h2>Спести умно, живей по-добре!</h2>
-                    <h4>Искаш повече пари в края на месеца?</h4>
-                    <p>Следвай тези лесни съвети и започни да трупаш спестявания днес!</p>
+                    <h2>@Localizer["SaveSmartLiveBetter"]</h2>
+                    <h4>@Localizer["WantMoreMoney"]</h4>
+                    <p>@Localizer["FollowTheseTips"]</p>
                     <ul>
-                        <li><strong>Определи бюджет</strong> –  Следи разходите си и намали ненужните покупки.</li>
-                        <li><strong>Автоматично спестяване</strong> – Прехвърляй малка сума всеки месец в спестовна сметка.</li>
-                        <li><strong>Пазарувай с ум</strong> – Търси промоции, използвай кодове за отстъпка и не купувай импулсивно.</li>
-                        <li><strong>Готви у дома</strong> – Намали разходите за ресторанти и доставки.</li>
-                        <li><strong>Оптимизирай сметките си</strong> – Намери по-изгодни планове за ток, интернет и мобилни услуги.</li>
+                        <li><strong>@Localizer["SetBudget"]</strong> - @Localizer["SetBudgetText"]</li>
+                        <li><strong>@Localizer["AutoSave"]</strong> - @Localizer["AutoSaveText"]</li>
+                        <li><strong>@Localizer["ShopSmart"]</strong> - @Localizer["ShopSmartText"]</li>
+                        <li><strong>@Localizer["CookAtHome"]</strong> - @Localizer["CookAtHomeText"]</li>
+                        <li><strong>@Localizer["OptimizeBills"]</strong> - @Localizer["OptimizeBillsText"]</li>
                     </ul>
                 </div>
             </aside>
@@ -112,6 +161,12 @@
     </div>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function setLanguage(culture) {
+            document.getElementById('culture-input').value = culture;
+            document.getElementById('culture-form').submit();
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

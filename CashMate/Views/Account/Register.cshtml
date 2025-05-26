@@ -1,4 +1,6 @@
-﻿@model CashMate.Models.RegisterViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model CashMate.Models.RegisterViewModel
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -18,31 +20,31 @@
     <body>
         <div class="form-container mx-auto">
 
-            <h2>Registration</h2>
+            <h2>@Localizer["Registration"]</h2>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Email</span>
+                <span class="input-group-text" id="basic-addon1">@Localizer["Email"]</span>
                 @Html.TextBox("email", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Password</span>
+                <span class="input-group-text" id="basic-addon1">@Localizer["Password"]</span>
                 @Html.Password("password", null, new { @class = "form-control", aria_describedby = "basic-addon1", id = "password" })
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Confirm Password</span>
+                <span class="input-group-text" id="basic-addon1">@Localizer["Confirm Password"]</span>
                 @Html.Password("confirmPassword", null, new { @class = "form-control", aria_describedby = "basic-addon1", id = "confirmPassword" })
             </div>
 
             <div id="passwordError" style="color:red; display:none;"></div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">UserName</span>
+                <span class="input-group-text" id="basic-addon1">@Localizer["UserName"]</span>
                 @Html.TextBox("userName", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-primary" type="submit" onclick="return validatePasswords()">Registration</button>
+                <button class="btn btn-primary" type="submit" onclick="return validatePasswords()">@Localizer["Registration"]</button>
             </div>
         </div>
     </body>
@@ -55,7 +57,7 @@
         var errorDiv = document.getElementById("passwordError");
 
         if (password !== confirmPassword) {
-            errorDiv.innerText = "Паролите не съвпадат!";
+            errorDiv.innerText = @Localizer["Pass"];
             errorDiv.style.display = "block"; // Показване на съобщението за грешка
             return false; // Забранява подаването на формуляра
         } else {

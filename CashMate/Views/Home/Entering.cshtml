@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
     ViewBag.Title = "Purchases";
 }
 
@@ -9,17 +11,17 @@
     </head>
     <body>
         <div class="form-container mx-auto">
-            <h2>Select period for @ViewBag.UserName</h2>
+            <h2>@Localizer["Select"] @ViewBag.UserName</h2>
 
             <div>
-                <label for="startDate">Begin date:</label>
+                <label for="startDate">@Localizer["Begin date"]:</label>
                 <input type="date" id="startDate" name="startDate" value="@ViewBag.StartDate" required />
 
-                <label for="endDate">End date:</label>
+                <label for="endDate">@Localizer["End date"]:</label>
                 <input type="date" id="endDate" name="endDate" value="@ViewBag.EndDate" required />
             </div><br />
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-primary" type="submit">Show movement</button>
+                <button class="btn btn-primary" type="submit">@Localizer["Show movement"]</button>
             </div>
         </div>
         <div id="result">

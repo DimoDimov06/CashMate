@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
     ViewBag.Title = "Confirm Email";
 }
 
@@ -7,15 +9,15 @@
 </head>
 <body>
     <div class="form-container mx-auto">
-        <h2>Confirm Email</h2>
+        <h2>@Localizer["Confirm"]</h2>
 
-        <h4>A confirmation code has been sent to your email.</h4>
+        <h4>@Localizer["Code"].</h4>
         <form asp-action="ConfirmEmail" method="post">
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Insert verification code:</span>
+                <span class="input-group-text" id="basic-addon1">@Localizer["Insert"]:</span>
                 @Html.TextBox("code", null, new { @class = "form-control", aria_describedby = "basic-addon1" })
             </div>
-            <button type="submit" class="btn btn-primary">Confirm</button>
+            <button type="submit" class="btn btn-primary">@Localizer["Confirm"]</button>
         </form> 
     </div>
     

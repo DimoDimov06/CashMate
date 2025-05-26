@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,10 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddControllersWithViews().AddViewLocalization();
+
+builder.Services.AddMvc().AddViewLocalization();
+ 
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -38,11 +44,28 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[]
+    {
+        new CultureInfo("en"),
+        new CultureInfo("bg")
+    };
+
+    options.DefaultRequestCulture = new RequestCulture("en");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+
 var connectionString = builder.Configuration.GetConnectionString("YourConnectionStringName") 
     ?? throw new InvalidOperationException("Connection string 'YourConnectionStringName' not fond."); 
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 
 
 
@@ -61,6 +84,7 @@ if (app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseRequestLocalization();
 
 app.UseStaticFiles();
 
@@ -69,7 +93,8 @@ app.UseAuthentication(); // Тук добавете UseAuthentication
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseAuthorization();
+
+app.UseAuthorization(); 
 
 app.MapControllerRoute(
        name: "default",

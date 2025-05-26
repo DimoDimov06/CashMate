@@ -1,10 +1,12 @@
-﻿@model CashMate.Models.EntryViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model CashMate.Models.EntryViewModel
 
 @{
     ViewBag.Title = "Edit Purchase";
 }
 
-<h2>Edit Purchase</h2>
+<h2>@Localizer["Edit Purchase"]</h2>
 
 @using (Html.BeginForm("Edit", "Purchases", FormMethod.Post))
 {
@@ -26,34 +28,34 @@
             @Html.AntiForgeryToken()
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Date</span>
+                <span class="input-group-text" id="basic-addon1">@Localizer["Date"]</span>
                 @Html.TextBoxFor(model => model.PurchaseDateFormatted, new { @class = "form-control",
                         type = "date", aria_describedby = "basic-addon1" })
                 @Html.ValidationMessageFor(model => model.PurchaseDate)
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Debit</span>
+                <span class="input-group-text" id="basic-addon1">@Localizer["Debit"]</span>
                 @Html.TextBoxFor(model => model.DebitFormatted, new { @class = "form-control", type = "text", step = "0.01",
                         pattern = @"^\d+(\.\d{1,2})?$", aria_describedby = "basic-addon1", id = "debitInput" })
                 @Html.ValidationMessageFor(model => model.Debit)
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Credit</span>
+                <span class="input-group-text" id="basic-addon1">@Localizer["Credit"]</span>
                 @Html.TextBoxFor(model => model.CreditFormatted, new { @class = "form-control", type = "text", step = "0.01",
                         pattern = @"^\d+(\.\d{1,2})?$", aria_describedby = "basic-addon1", id = "creditInput" })
                 @Html.ValidationMessageFor(model => model.Credit)
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Description</span>
+                <span class="input-group-text" id="basic-addon1">@Localizer["Description"]</span>
                 @Html.TextBoxFor(model => model.Description, new { @class = "form-control", aria_describedby = "basic-addon1" })
                 @Html.ValidationMessageFor(model => model.Description)
             </div>
 
             <div class="form-group">
-                 <input type="submit" value="Save" class="btn btn-primary" />
+                 <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
             </div>
     
 

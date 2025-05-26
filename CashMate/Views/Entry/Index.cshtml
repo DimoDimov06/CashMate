@@ -1,4 +1,6 @@
-﻿@model CashMate.Models.EntryViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model CashMate.Models.EntryViewModel
 
 @using (Html.BeginForm())
 {
@@ -13,30 +15,30 @@
     </style>
     <div class="form-container mx-aut">
 
-        <h2>Create new order for</h2>
+        <h2>@Localizer["Create"]</h2>
         <h2>@ViewBag.UserId</h2>
 
         @Html.HiddenFor(model => model.Id) <!-- Скрито поле за ID на покупката -->
 
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Date</span>
+            <span class="input-group-text" id="basic-addon1">@Localizer["Date"]</span>
             @Html.TextBoxFor(model => model.PurchaseDate, new { @class = "form-control", type = "date", aria_describedby = "basic-addon1" })
         </div>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Debit</span>
+            <span class="input-group-text" id="basic-addon1">@Localizer["Debit"]</span>
             @Html.TextBoxFor(model => model.DebitFormatted, new { @class = "form-control", aria_describedby = "basic-addon1", type = "text", step = "0.01", pattern = @"^\d+(\.\d{1,2})?$" })
         </div>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Credit</span>
+            <span class="input-group-text" id="basic-addon1">@Localizer["Credit"]</span>
             @Html.TextBoxFor(model => model.CreditFormatted, new { @class = "form-control", aria_describedby = "basic-addon1", type = "text", step = "0.01", pattern = @"^\d+(\.\d{1,2})?$" })
         </div>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Description</span>
+            <span class="input-group-text" id="basic-addon1">@Localizer["Description"]</span>
             @Html.TextBoxFor(model => model.Description, new { @class = "form-control", aria_describedby = "basic-addon1" })
         </div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-primary" type="submit">Save</button>
+            <button class="btn btn-primary" type="submit">@Localizer["Save"]</button>
         </div>
 
     </div>

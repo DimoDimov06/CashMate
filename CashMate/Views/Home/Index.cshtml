@@ -1,7 +1,9 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
     ViewData["Title"] = "Home Page";
 }
-<h2>Welcome!</h2>
+<h2>@Localizer["Welcome"]!</h2>
 
 @if (TempData["SuccessMessage"] != null)
 {
